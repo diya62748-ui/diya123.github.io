@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diya — Modelling Portfolio</title>
+<meta name="description" content="Diya, 19. Fashion, modelling and photography portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fdf8f2;--blush:#dec0b4;--taupe:#e0d3c8;--brown:#55352a;--rose:#c9a595;
+  --serif:"DM Serif Display",Georgia,serif;--body:"Lora",Georgia,serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:var(--body);line-height:1.8;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brown);outline-offset:3px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1}
+h2{font-size:clamp(2.4rem,6vw,4rem);margin-bottom:.4em}
+section{padding:clamp(64px,10vw,120px) clamp(20px,6vw,80px);position:relative}
+.wrap{max-width:1100px;margin:auto}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;
+  padding:14px clamp(20px,6vw,80px);background:color-mix(in srgb,var(--cream) 88%,transparent);backdrop-filter:blur(8px)}
+nav b{font-family:var(--serif);font-weight:400;font-size:1.4rem}
+nav div{display:flex;gap:22px;font-size:.95rem}
+nav a{text-decoration:none} nav a:hover{text-decoration:underline}
+@media(max-width:700px){nav div a:nth-child(n+4){display:none}}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:40px;overflow:hidden;padding-top:110px}
+.hero::before{content:"";position:absolute;right:-10%;top:50%;width:70vmin;height:70vmin;background:var(--blush);
+  transform:translateY(-50%) rotate(45deg);z-index:0}
+.hero h1{font-size:clamp(4.5rem,14vw,10rem);position:relative;z-index:1}
+.hero p.sub{margin-top:20px;display:inline-block;background:var(--taupe);padding:6px 22px;font-family:var(--serif);letter-spacing:.04em;position:relative;z-index:1}
+.hero .lede{max-width:44ch;margin-top:24px;position:relative;z-index:1}
+.btns{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{padding:12px 26px;border:2px solid var(--brown);text-decoration:none;font-weight:600;transition:background .2s,color .2s}
+.btn.fill{background:var(--brown);color:var(--cream)}
+.btn:hover{background:var(--brown);color:var(--cream)} .btn.fill:hover{background:transparent;color:var(--brown)}
+.stage{perspective:1000px;position:relative;z-index:1;justify-self:center}
+.tilt{transform-style:preserve-3d;transition:transform .15s ease-out;will-change:transform}
+.tilt img{display:block;width:100%;box-shadow:0 30px 60px -20px rgba(85,53,42,.5)}
+.portrait{width:min(380px,78vw)}
+.portrait img{aspect-ratio:596/632;object-fit:cover}
+.portrait::after{content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--brown);transform:translateZ(-40px);z-index:-1}
+@media(max-width:800px){.hero{grid-template-columns:1fr;text-align:left}.hero::before{top:75%}}
+
+/* about */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.split .stage img{aspect-ratio:3/4;object-fit:cover}
+.split p+p{margin-top:1em}
+.band{background:var(--taupe)}
+@media(max-width:800px){.split{grid-template-columns:1fr}}
+
+/* 3D ring gallery */
+.gallery{background:var(--blush);overflow:hidden;text-align:center}
+.ring-scene{perspective:1400px;height:clamp(340px,52vw,460px);margin-top:20px;touch-action:pan-y;cursor:grab}
+.ring-scene:active{cursor:grabbing}
+.ring{position:relative;width:var(--w);height:100%;margin:0 auto;transform-style:preserve-3d}
+.ring figure{position:absolute;inset:0 0 auto 0;height:clamp(300px,46vw,420px);backface-visibility:hidden;
+  box-shadow:0 20px 40px -15px rgba(85,53,42,.55);background:var(--cream);padding:8px}
+.ring img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
+.ctrl{margin-top:24px;display:flex;gap:14px;justify-content:center;align-items:center}
+.ctrl button{all:unset;cursor:pointer;width:46px;height:46px;border:2px solid var(--brown);border-radius:50%;text-align:center;line-height:42px;font-size:1.3rem}
+.ctrl button:hover{background:var(--brown);color:var(--cream)}
+.ctrl button:focus-visible{outline:2px solid var(--brown);outline-offset:3px}
+.hint{font-size:.9rem;font-style:italic}
+
+/* text blocks */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px)}
+.two h2{font-size:clamp(2rem,4.5vw,3rem)}
+@media(max-width:800px){.two{grid-template-columns:1fr}}
+.skills{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.skills li{padding:8px 20px;border:2px solid var(--brown);border-radius:999px;background:var(--cream)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 20px}
+dt{font-weight:600}dd{margin:0}
+.contact{background:var(--brown);color:var(--cream);text-align:center}
+.contact a{display:block;font-family:var(--serif);font-size:clamp(1.4rem,4vw,2.4rem);text-decoration:none;margin:10px 0;overflow-wrap:anywhere}
+.contact a:hover{text-decoration:underline}
+footer{background:var(--brown);color:var(--blush);text-align:center;padding:0 20px 36px;font-size:.9rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tilt{transition:none}}
+</style>
+</head>
+<body>
+<nav>
+  <b>Diya</b>
+  <div><a href="#about">About</a><a href="#gallery">Gallery</a><a href="#vision">Vision</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>Diya</h1>
+    <p class="sub">Modelling · Fashion · Photography</p>
+    <p class="lede">19 years old, college student. I love expressing myself in front of the camera and exploring different looks, styles and concepts.</p>
+    <div class="btns"><a class="btn fill" href="#gallery">See my photos</a><a class="btn" href="#contact">Let’s collaborate</a></div>
+  </div>
+  <div class="stage"><div class="tilt portrait" data-tilt><img src="images/hero.jpg" alt="Diya in a black blazer"></div></div>
+</header>
+
+<section id="about" class="band">
+  <div class="wrap split">
+    <div class="stage"><div class="tilt" data-tilt><img src="images/stairs-white.jpg" alt="Diya sitting on stairs, smiling"></div></div>
+    <div>
+      <h2>About me</h2>
+      <p>Hi, I’m Diya. I’m a 19-year-old college student passionate about fashion, modelling and photography.</p>
+      <p>I love exploring new styles, expressing my personality through the camera and creating beautiful visuals. I’m always open to new experiences and creative collaborations.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <h2>Gallery</h2>
+    <p class="hint">Drag the ring, or use the arrows.</p>
+    <div class="ring-scene" id="scene"><div class="ring" id="ring"></div></div>
+    <div class="ctrl"><button id="prev" aria-label="Previous photo">‹</button><button id="next" aria-label="Next photo">›</button></div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="wrap two">
+    <div><h2>Vision</h2><p>To turn my passion for fashion and photography into meaningful opportunities, express my unique personality, and grow with confidence, creativity and elegance.</p></div>
+    <div><h2>Mission</h2><p>To express creativity, build confidence, explore new opportunities, and express my unique identity through fashion and photography.</p></div>
+  </div>
+</section>
+
+<section id="skills" class="band">
+  <div class="wrap split">
+    <div>
+      <h2>Skills</h2>
+      <ul class="skills">
+        <li>Posing &amp; camera confidence</li><li>Facial expressions</li><li>Fashion &amp; styling</li>
+        <li>Creativity &amp; self-expression</li><li>Adaptability to different looks</li>
+        <li>Communication</li><li>Confidence &amp; presentation</li><li>Willingness to learn</li>
+      </ul>
+    </div>
+    <div class="stage"><div class="tilt" data-tilt><img src="images/bridge.jpg" alt="Diya in a striped cardigan on a wooden bridge" style="aspect-ratio:4/4.5;object-fit:cover"></div></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap two">
+    <div><h2>Experience</h2><p>I’m a fresher with a strong interest in modelling, fashion and photography. I’m eager to gain experience, explore different styles and work with creative professionals, and I’m open to new opportunities and collaborations to learn, grow and build my journey in the modelling industry.</p></div>
+    <div><h2>Education</h2>
+      <dl><dt>Status</dt><dd>College student</dd><dt>Qualification</dt><dd>Undergraduate (pursuing)</dd><dt>Interests</dt><dd>Fashion, modelling &amp; photography</dd></dl>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let’s collaborate</h2>
+    <a href="mailto:diya62748@gmail.com">diya62748@gmail.com</a>
+    <a href="https://www.instagram.com/di_ya_rana.22" target="_blank" rel="noopener">@di_ya_rana.22</a>
+    <a href="tel:+917830614821">7830614821</a>
+  </div>
+</section>
+<footer>© 2026 Diya</footer>
+
+<script>
+/* ---- Gallery: edit this list to add or remove photos ---- */
+const PHOTOS=[
+  ["stairs-white3.jpg","Diya sitting on stairs in a white shirt"],
+  ["stairs-pink.jpg","Diya in a pink shirt on stairs"],
+  ["bridge2.jpg","Diya walking on a wooden bridge"],
+  ["stairs-white2.jpg","Close portrait in a white shirt"],
+  ["plant.jpg","Diya in a black top beside a palm plant"],
+  ["stairs-white.jpg","Diya resting her cheek on her hand"],
+  ["bridge.jpg","Diya in a striped cardigan"],
+  ["hero.jpg","Diya in a black blazer"]
+];
+const ring=document.getElementById("ring"),scene=document.getElementById("scene");
+const n=PHOTOS.length;let w,radius,angle=0,dragging=false,startX=0,startA=0,auto=true;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+PHOTOS.forEach(([f,alt],i)=>{const fig=document.createElement("figure");fig.innerHTML=`<img src="images/${f}" alt="${alt}" loading="lazy">`;ring.appendChild(fig)});
+function layout(){
+  w=Math.min(240,innerWidth*0.55);ring.style.setProperty("--w",w+"px");
+  radius=Math.round((w/2)/Math.tan(Math.PI/n))+20;
+  [...ring.children].forEach((fig,i)=>fig.style.transform=`rotateY(${i*360/n}deg) translateZ(${radius}px)`);
+  draw();
+}
+function draw(){ring.style.transform=`translateZ(${-radius}px) rotateY(${angle}deg)`}
+function snap(){angle=Math.round(angle/(360/n))*(360/n);ring.style.transition="transform .5s cubic-bezier(.2,.8,.2,1)";draw()}
+scene.addEventListener("pointerdown",e=>{dragging=true;auto=false;startX=e.clientX;startA=angle;ring.style.transition="none";scene.setPointerCapture(e.pointerId)});
+scene.addEventListener("pointermove",e=>{if(!dragging)return;angle=startA+(e.clientX-startX)*0.4;draw()});
+scene.addEventListener("pointerup",()=>{dragging=false;snap()});
+document.getElementById("prev").onclick=()=>{auto=false;angle+=360/n;snap()};
+document.getElementById("next").onclick=()=>{auto=false;angle-=360/n;snap()};
+if(!reduce)setInterval(()=>{if(auto&&!dragging){angle-=360/n;snap()}},3200);
+addEventListener("resize",layout);layout();
+
+/* ---- 3D tilt on photos ---- */
+if(!reduce&&matchMedia("(hover:hover)").matches){
+  document.querySelectorAll("[data-tilt]").forEach(el=>{
+    el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      el.style.transform=`rotateY(${x*18}deg) rotateX(${-y*18}deg)`});
+    el.addEventListener("pointerleave",()=>el.style.transform="");
+  });
+}
+</script>
+</body>
+</html>
